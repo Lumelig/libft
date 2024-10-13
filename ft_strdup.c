@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 13:27:08 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/11 12:56:36 by jpflegha         ###   ########.fr       */
+/*   Created: 2024/10/12 14:11:34 by jpflegha          #+#    #+#             */
+/*   Updated: 2024/10/12 18:16:32 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int i)
+char	*ft_strdup(const char *s1)
 {
-	if ((i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z')
-		|| (i >= '0' && i <= '9'))
-		return (1);
-	return (0);
+	size_t		i;
+	char		*cpy;
+
+	i = 0;
+	cpy = (char *)malloc(ft_strlen(s1) + 1);
+	if (!cpy)
+		return (NULL);
+	while (s1[i])
+	{
+		cpy[i] = s1[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
 }

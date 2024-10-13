@@ -6,18 +6,17 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:20:02 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/10 13:57:28 by jpflegha         ###   ########.fr       */
+/*   Updated: 2024/10/13 17:51:23 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isdigit(int i)
+int	ft_isdigit(int i)
 {
-    if (i >= '0' && i <= '9')
-    {
-        return (1);
-    }
-    return (0);
-    
+	if (i >= '0' && i <= '9')
+	{
+		return (1);
+	}
+	return (0);
 }

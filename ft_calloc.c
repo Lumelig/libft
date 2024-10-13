@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 13:27:08 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/11 12:56:36 by jpflegha         ###   ########.fr       */
+/*   Created: 2024/10/12 13:49:21 by jpflegha          #+#    #+#             */
+/*   Updated: 2024/10/12 14:05:48 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int i)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if ((i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z')
-		|| (i >= '0' && i <= '9'))
-		return (1);
-	return (0);
+	unsigned char	*tmp;
+	size_t			i;
+
+	i = 0;
+	tmp = malloc(count * size);
+	if (!tmp)
+		return (NULL);
+	while (i < count * size)
+		tmp[i++] = 0;
+	return (tmp);
 }
