@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:45:41 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/10 15:50:44 by jpflegha         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:26:47 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	d = (char *)dest;
 	s = (char *)src;
+	if (!dest && !src)
+		return (dest);
 	while (i < n)
 	{
 		d[i] = s[i];

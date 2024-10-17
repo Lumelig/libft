@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 14:02:06 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/13 19:37:36 by jpflegha         ###   ########.fr       */
+/*   Created: 2024/10/17 16:05:44 by jpflegha          #+#    #+#             */
+/*   Updated: 2024/10/17 17:04:39 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	char	*c;
 
-	i = 0;
-	while (*str)
+	c = ft_itoa(n);
+	if (c)
 	{
-		str++;
-		i++;
+		write(fd, c, ft_strlen(c));
+		free(c);
 	}
-	return (i);
 }

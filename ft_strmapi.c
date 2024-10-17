@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 14:02:06 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/13 19:37:36 by jpflegha         ###   ########.fr       */
+/*   Created: 2024/10/17 15:43:22 by jpflegha          #+#    #+#             */
+/*   Updated: 2024/10/17 15:43:38 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
+	char	*res;
+	int		i;
 
 	i = 0;
-	while (*str)
+	res = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		str++;
+		res[i] = (*f)(i, s[i]);
 		i++;
 	}
-	return (i);
+	res[i] = '\0';
+	return (res);
 }
