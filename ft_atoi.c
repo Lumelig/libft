@@ -6,32 +6,30 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:28:08 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/12 17:59:23 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/03/27 19:57:17 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 int	ft_atoi(const char *str)
 {
-	int		neg;
-	long	res;
+	int result = 0;
+	int sign = 1;
 
-	neg = 1;
-	res = 0;
-	while (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\v'
-		|| *str == '\f' || *str == '\r')
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			neg *= -1;
+	while (*str == ' ' || *str == '\t' || *str == '\n' ||
+		*str == '\r' || *str == '\f' || *str == '\v') {
 		str++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = (res * 10) + (*str - 48);
+	if (*str == '-' || *str == '+') {
+		sign = (*str == '-') ? -1 : 1;
 		str++;
 	}
-	return (res * neg);
+	while (*str >= '0' && *str <= '9') {
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+
+	return (result * sign);
 }
