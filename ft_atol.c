@@ -6,71 +6,68 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:07:46 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/03/27 20:08:11 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:08:05 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 #include <errno.h>
+#include <limits.h>
+
+static void	skip_whitespace_and_check_sign(const char **str, int *sign)
+{
+	while (**str == ' ' || **str == '\t' || **str == '\n' || **str == '\r'
+		|| **str == '\f' || **str == '\v')
+	{
+		(*str)++;
+	}
+	if (**str == '-' || **str == '+')
+	{
+		if (**str == '-')
+			*sign = -1;
+		(*str)++;
+	}
+}
+
+static long	handle_conversion_and_check_overflow(const char *str, int sign)
+{
+	long	res;
+
+	res = 0;
+	while (*str >= '0' && *str <= '9')
+	{
+		if (sign == 1 && (res > LONG_MAX / 10 || (res == LONG_MAX / 10 && (*str
+						- '0') > LONG_MAX % 10)))
+		{
+			errno = ERANGE;
+			return (LONG_MAX);
+		}
+		if (sign == -1 && (res > -(LONG_MIN / 10) || (res == -(LONG_MIN / 10)
+					&& (*str - '0') > -(LONG_MIN % 10))))
+		{
+			errno = ERANGE;
+			return (LONG_MIN);
+		}
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (res);
+}
 
 long	ft_atol(const char *str)
 {
-	long	res;
 	int		sign;
-	int		i;
+	long	result;
 
-	res = 0;
 	sign = 1;
-	i = 0;
-
-	// Skip leading whitespace
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || 
-		   str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
-		i++;
-
-	// Handle sign
-	if (str[i] == '-' || str[i] == '+')
-	{
-		sign = (str[i] == '-') ? -1 : 1;
-		i++;
-	}
-
-	// Convert digits
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		// Overflow check for positive numbers
-		if (sign == 1 && 
-			(res > LONG_MAX / 10 || 
-			 (res == LONG_MAX / 10 && (str[i] - '0') > LONG_MAX % 10)))
-		{
-			errno = ERANGE;
-			return LONG_MAX;
-		}
-		
-		// Overflow check for negative numbers
-		if (sign == -1 && 
-			(res > -(LONG_MIN / 10) || 
-			 (res == -(LONG_MIN / 10) && (str[i] - '0') > -(LONG_MIN % 10))))
-		{
-			errno = ERANGE;
-			return LONG_MIN;
-		}
-
-		res = res * 10 + (str[i] - '0');
-		i++;
-	}
-
-	// Skip trailing whitespace
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-		i++;
-
-	// Check for invalid characters after number
-	if (str[i] != '\0')
+	skip_whitespace_and_check_sign(&str, &sign);
+	result = handle_conversion_and_check_overflow(str, sign);
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	if (*str != '\0')
 	{
 		errno = EINVAL;
-		return 0;
+		return (0);
 	}
-
-	return res * sign;
+	return (result * sign);
 }
