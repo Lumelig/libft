@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:07:46 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/03/28 15:42:31 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:50:10 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ long	ft_atol(const char *str)
 	j = 0;
 	out = 0;
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-				|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\v' || str[i] == '\f')
 	{
 		i++;
 		j++;
