@@ -6,13 +6,15 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:07:46 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/03/28 14:08:05 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:37:48 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <errno.h>
 #include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 static void	skip_whitespace_and_check_sign(const char **str, int *sign)
 {
