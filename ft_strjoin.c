@@ -6,35 +6,46 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:41:43 by jpflegha          #+#    #+#             */
-/*   Updated: 2024/10/13 22:00:23 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:08:02 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	free_and_null(char **ptr)
 {
-	char	*res;
-	char	*tmp;
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
 
-	if (!s1 || !s2)
-		return (NULL);
-	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!res)
-		return (NULL);
-	tmp = res;
-	while (*s1)
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	if (!s2)
+		return (s1);
+	if (!s1)
 	{
-		*res = *s1;
-		s1++;
-		res++;
+		s1 = malloc(1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
 	}
-	while (*s2)
-	{
-		*res = *s2;
-		s2++;
-		res++;
-	}
-	*res = '\0';
-	return (tmp);
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (free_and_null(&s1), NULL);
+	i = -1;
+	j = 0;
+	while (s1[++i])
+		str[i] = s1[i];
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	free_and_null(&s1);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/03/27 20:12:14 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:08:11 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_list
 {
@@ -71,7 +76,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_strtrim(char const *s1, char const *set);
 
@@ -110,4 +115,20 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int	ft_printf(const char *str, ...);
+
+int	print_format(char c, va_list ap);
+
+int	print_digit(long n, char c, int base);
+
+int	print_str(char *str);
+
+int	print_char(char c);
+
+int	print_pointer(unsigned long n, unsigned int base);
+
+int	check_pointer(unsigned long n, unsigned int base);
+
+char	*get_next_line(int fd);
 #endif
