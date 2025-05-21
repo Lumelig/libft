@@ -6,11 +6,11 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:29:52 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/05/21 00:04:46 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:03:54 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 
 int	print_char(char c)

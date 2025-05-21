@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/05/21 00:08:11 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:00:56 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 # endif
 
 typedef struct s_list
@@ -131,4 +132,7 @@ int	print_pointer(unsigned long n, unsigned int base);
 int	check_pointer(unsigned long n, unsigned int base);
 
 char	*get_next_line(int fd);
+
+bool	ft_is_space(char c);
+
 #endif
