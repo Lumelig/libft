@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/05/21 14:00:56 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:06:40 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ int	check_pointer(unsigned long n, unsigned int base);
 
 char	*get_next_line(int fd);
 
-bool	ft_is_space(char c);
+bool	ft_isspace(char c);
 
 #endif
