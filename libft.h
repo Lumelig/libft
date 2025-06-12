@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/05/26 15:06:40 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/06/12 13:44:17 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+
+int	ft_strcmp(const char *s1, const char *s2);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
