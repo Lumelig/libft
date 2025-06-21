@@ -6,12 +6,11 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:29:52 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/06/19 21:37:32 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:31:41 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 int	print_digit_upper(unsigned long n, int base)
 {
@@ -81,30 +80,26 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	int		i;
-	int		count;
 	int		ret;
 
 	i = 0;
-	count = 0;
+	ret = 0;
 	va_start(ap, str);
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1])
 		{
-			i++;
-			ret = print_format(str[i], ap);
+			ret += print_format(str[++i], ap);
 			if (ret == -1)
 				return (va_end(ap), -1);
-			count += ret;
 		}
 		else
 		{
-			ret = write(1, &str[i], 1);
+			ret += write(1, &str[i], 1);
 			if (ret == -1)
 				return (va_end(ap), -1);
-			count += ret;
 		}
 		i++;
 	}
-	return (va_end(ap), count);
+	return (va_end(ap), ret);
 }

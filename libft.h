@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/06/19 21:40:41 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:19:56 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+char				*ft_strcpy(char *dest, const char *src);
 
 int					print_str(char *str);
 
@@ -130,10 +132,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_printf(const char *str, ...);
 
 int					print_format(char c, va_list ap);
-
-
-
-
 
 int					check_pointer(unsigned long n, unsigned int base);
 
