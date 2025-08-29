@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/07/07 18:39:38 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:45:00 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ char				*get_next_line(int fd);
 
 bool				ft_isspace(char c);
 
-char			*ft_strjoin_char(char const *s1, char c);
-
+char				*ft_strjoin_char(char const *s1, char c);
 
 #endif
