@@ -3,125 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 21:25:38 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/06/19 21:39:46 by jpflegha         ###   ########.fr       */
+/*   Created: 2025/11/03 18:42:11 by jpflegha          #+#    #+#             */
+/*   Updated: 2025/11/03 18:42:32 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_and_null(char **ptr)
+char	*ft_read_loop(int fd, char *save, char *line, int *bytes_read)
 {
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
-}
-
-char	*read_file(int fd, char *remainder)
-{
-	char	*buffer;
 	char	*temp;
-	int		bytes_read;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (free_and_null(&remainder), NULL);
-	bytes_read = 1;
-	while (bytes_read > 0)
+	*bytes_read = 1;
+	while (!ft_strchr(line, '\n') && *bytes_read != 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
-			return (free_and_null(&buffer), free_and_null(&remainder), NULL);
-		if (bytes_read == 0)
-			break ;
-		buffer[bytes_read] = '\0';
-		temp = remainder;
-		remainder = ft_strjoin(remainder, buffer);
-		free_and_null(&temp);
-		if (!remainder || ft_strchr(remainder, '\n'))
-			break ;
+		*bytes_read = read(fd, save, BUFFER_SIZE);
+		if (*bytes_read == -1)
+			return (free(line), NULL);
+		save[*bytes_read] = '\0';
+		temp = ft_strjoin(line, save);
+		if (temp == NULL)
+			return (free(line), NULL);
+		free(line);
+		line = temp;
 	}
-	free_and_null(&buffer);
-	return (remainder);
-}
-
-char	*extract_line(char *remainder)
-{
-	char	*line;
-	int		i;
-
-	if (!remainder || !remainder[0])
-		return (NULL);
-	i = 0;
-	while (remainder[i] && remainder[i] != '\n')
-		i++;
-	if (remainder[i] == '\n')
-		i++;
-	line = malloc(i + 1);
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (remainder[i] && remainder[i] != '\n')
-	{
-		line[i] = remainder[i];
-		i++;
-	}
-	if (remainder[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
-	return (line[i] = '\0', line);
-}
-
-char	*update_remainder(char *remainder)
-{
-	char	*new_remainder;
-	int		i;
-	int		j;
-
-	if (!remainder)
-		return (NULL);
-	i = 0;
-	while (remainder[i] && remainder[i] != '\n')
-		i++;
-	if (!remainder[i])
-	{
-		free_and_null(&remainder);
-		return (NULL);
-	}
-	new_remainder = malloc(ft_strlen(remainder) - i + 1);
-	if (!new_remainder)
-		return (free_and_null(&remainder), NULL);
-	i++;
-	j = 0;
-	while (remainder[i])
-		new_remainder[j++] = remainder[i++];
-	new_remainder[j] = '\0';
-	free_and_null(&remainder);
-	return (new_remainder);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	*remainder;
-	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	remainder = read_file(fd, remainder);
-	if (!remainder)
-		return (NULL);
-	line = extract_line(remainder);
-	if (!line)
-	{
-		free_and_null(&remainder);
-		return (NULL);
-	}
-	remainder = update_remainder(remainder);
 	return (line);
 }
+
+char	*ft_get_line(char *str)
+{
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\n' && str[i] != '\0')
+		i++;
+	if (str[i] == '\n')
+		line = ft_substr(str, 0, i + 1);
+	else
+		line = ft_strdup(str);
+	return (line);
+}
+
+int	ft_reset_save(char *save)
+{
+	int	i;
+
+	i = 0;
+	while (save[i] != '\n' && save[i] != '\0')
+		i++;
+	if (save[i] == '\n')
+	{
+		ft_memcpy(save, ft_strchr(save, '\n') + 1, ft_strlen(ft_strchr(save,
+					'\n')));
+		return (1);
+	}
+	return (0);
+}
+char	*get_next_line(int fd)
+{
+	static char	save[BUFFER_SIZE + 1];
+	char		*line;
+	char		*temp;
+	int			bytes_read;
+
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, save, 0) == -1)
+		return (ft_memcpy(save, "\0", 1), NULL);
+	line = ft_strdup(save);
+	if (line == NULL)
+		return (NULL);
+	line = ft_read_loop(fd, save, line, &bytes_read);
+	if (line == NULL)
+		return (NULL);
+	if (ft_strlen(line) == 0 && bytes_read == 0)
+		return (free(line), NULL);
+	temp = ft_get_line(line);
+	return (ft_reset_save(save), free(line), temp);
+}
+
