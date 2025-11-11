@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:52:59 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 04:56:26 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 05:33:06 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /// It stops parsing when a non-numeric character (other than '.') is encountered.
 /// @param char *str 
 /// @return double
-double	ft_atof(const char *str)
+float	ft_atof(const char *str)
 {
 	double	result = 0.0;
 	double	frac = 0.0;
