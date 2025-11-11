@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:04 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 05:29:56 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:35:20 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 
 int 				ft_isfloat(char *str);
 
-double				ft_atof(const char *str);
+float				ft_atof(const char *str);
 
 char				*ft_strcpy(char *dest, const char *src);
 
